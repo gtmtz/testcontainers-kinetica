@@ -14,11 +14,11 @@ public abstract class AbstractContainerBaseTest {
     private static final String PWD = "admin";
 
     static {
-        kineticaContainer = new KineticaContainer<>(KINETICA_INTEL_LATEST_IMAGE)
-                .withInitScript("somepath/init_kinetica.sql")
-                .withUsername(USER)
-                .withPassword(PWD)
-                .withLogConsumer(new Slf4jLogConsumer(logger));
+        kineticaContainer = new KineticaContainer(KINETICA_INTEL_LATEST_IMAGE);
+        kineticaContainer.withInitScript("somepath/init_kinetica.sql");
+        kineticaContainer.withUsername(USER);
+        kineticaContainer.withPassword(PWD);
+        kineticaContainer.withLogConsumer(new Slf4jLogConsumer(logger));
         kineticaContainer.addEnv("FULL_START", "1");
 
         long start = System.currentTimeMillis();

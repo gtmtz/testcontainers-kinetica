@@ -6,7 +6,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.Set;
 
-public class KineticaContainer<SELF extends KineticaContainer<SELF>> extends JdbcDatabaseContainer<SELF> {
+public class KineticaContainer extends JdbcDatabaseContainer<KineticaContainer> {
 
     private static final DockerImageName DEFAULT_IMAGE_NAME = DockerImageName.parse("kinetica/kinetica-intel");
 
@@ -23,14 +23,6 @@ public class KineticaContainer<SELF extends KineticaContainer<SELF>> extends Jdb
     private String username = DEFAULT_USER;
 
     private String password = DEFAULT_PASSWORD;
-
-    /**
-     * @deprecated use {@link KineticaContainer(DockerImageName)} instead
-     */
-    @Deprecated
-    public KineticaContainer() {
-        this(DEFAULT_IMAGE_NAME.withTag(DEFAULT_TAG));
-    }
 
     public KineticaContainer(String dockerImageName) {
         this(DockerImageName.parse(dockerImageName));
@@ -98,19 +90,19 @@ public class KineticaContainer<SELF extends KineticaContainer<SELF>> extends Jdb
     }
 
     @Override
-    public SELF withDatabaseName(final String databaseName) {
+    public KineticaContainer withDatabaseName(final String databaseName) {
         this.databaseName = databaseName;
         return self();
     }
 
     @Override
-    public SELF withUsername(final String username) {
+    public KineticaContainer withUsername(final String username) {
         this.username = username;
         return self();
     }
 
     @Override
-    public SELF withPassword(final String password) {
+    public KineticaContainer withPassword(final String password) {
         this.password = password;
         return self();
     }
